@@ -1,13 +1,15 @@
 # Usabilla PHP Client
 
-This package allows PHP developers to gain access to the Usabilla resources such as buttons, feedback items, campaigns and their results. This packages is heavily inspired by the [AWS PHP Client]
+[![Build Status](https://travis-ci.org/usabilla/api-php.svg?branch=master)](https://travis-ci.org/usabilla/api-php)
+
+This package allows PHP developers to gain access to the Usabilla resources such as buttons, feedback items, campaigns and their results. This packages is heavily inspired by the [AWS PHP Client].
 
 ## Resources
-* [User Guide][docs-guide] – For in-depth getting started and usage information
+* [API Documentation][docs-guide] – For in-depth getting started and usage information.
 
 ## Features
 
-* Built for PHP 5.4.3+ and is compliant with [PSR-4].
+* Built for PHP 5.4.3+ and is compliant with [PSR-4][PSR-4].
 * Built on [Guzzle v3][guzzle]
 * Installable through composer
 
@@ -61,6 +63,8 @@ print_r($response->json());
 * [Retrieve all buttons belonging to the account][example-all-buttons]
 [AWS PHP Client]: https://github.com/aws/aws-sdk-php
 [symfony2-events]: http://symfony.com/doc/2.3/components/event_dispatcher/introduction.html
-
-[example-feedback-iterator]: https://github.com/usabilla/php-client/examples/FeedbackIterator.php
-[example-all-buttons]: https://github.com/usabilla/php-client/examples/Buttons.php
+[guzzle]: https://github.com/guzzle/guzzle3
+[PSR-4]: http://www.php-fig.org/psr/psr-4/
+[example-feedback-iterator]: https://github.com/usabilla/api-php/tree/master/examples/FeedbackIterator.php
+[example-all-buttons]: https://github.com/usabilla/api-php/tree/master/examples/Buttons.php
+[docs-guide]: https://usabilla.com/api
