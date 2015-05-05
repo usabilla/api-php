@@ -17,13 +17,18 @@
         <const name="baseURL" value="https://data.usabilla.com"/>
         <const name="DEFAULT_KEY" value="USBLEXAMPLE"/>
         <const name="DEFAULT_SECRET" value="wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY"/>
-
-
     </php>
 
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+
     <logging>
-        <log type="coverage-html" target="@BASEDIR@/build/coverage/" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70" />
-        <log type="coverage-clover" target="@BASEDIR@/build/logs/clover.xml" />
+        <log type="coverage-html" target="build/coverage/" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70" />
+        <log type="coverage-clover" target="build/logs/clover.xml" />
 
     </logging>
 
