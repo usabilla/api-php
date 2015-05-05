@@ -31,7 +31,7 @@ $client = Client::factory(array(
 
 
 /* @var $command Guzzle\Service\Command\AbstractCommand */
-$command = $client->getCommand('GetButtons');
+$command = $client->getCommand('GetWebsiteButtons');
 /* @var $response Guzzle\Http\Message\Response */
 $response = $client->execute($command);
 
@@ -40,7 +40,7 @@ $response = $client->execute($command);
 // as specified in the service description
 
 /* @var $response Guzzle\Http\Message\Response */
-//$response = $client->getFeedbackItems();
+//$response = $client->GetWebsiteFeedbackItems();
 
 // Convert response to JSON
 print_r($response);

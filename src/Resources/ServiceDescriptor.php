@@ -28,12 +28,12 @@ namespace Usabilla\API\Resources;
 
 return [
     'baseUrl' => 'https://data.usabilla.com',
-    'apiVersion' => '1.0',
+    'apiVersion' => '1.1',
     'operations' => [
-        'GetCampaigns' => [
+        'GetWebsiteCampaigns' => [
             'httpMethod' => 'GET',
-            'uri' => '/live/website/campaign',
-            'responseModel' => 'CampaignItems',
+            'uri' => '/live/websites/campaign',
+            'responseModel' => 'WebsiteCampaignItems',
             'parameters' => [
                 'since' => [
                     'type' => 'integer',
@@ -45,10 +45,10 @@ return [
                 ],
             ],
         ],
-        'GetCampaignResults' => [
+        'GetWebsiteCampaignResults' => [
             'httpMethod' => 'GET',
-            'uri' => '/live/website/campaign/{id}/results',
-            'responseModel' => 'CampaignResultItems',
+            'uri' => '/live/websites/campaign/{id}/results',
+            'responseModel' => 'WebsiteCampaignResultItems',
             'parameters' => [
                 'id' => [
                     'type' => 'string',
@@ -64,21 +64,84 @@ return [
                 ],
             ],
         ],
-        'GetButtons' => [
+        'GetWebsiteCampaignStats' => [
             'httpMethod' => 'GET',
-            'uri' => '/live/website/button',
-            'responseModel' => 'ButtonItems',
+            'uri' => '/live/websites/campaign/{id}/stats',
+            'responseModel' => 'WebsiteCampaignStatsItems',
             'parameters' => [
+                'id' => [
+                    'type' => 'string',
+                    'location' => 'uri'
+                ],
+                'since' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
                 'limit' => [
                     'type' => 'integer',
                     'location' => 'query'
                 ],
             ],
         ],
-        'GetFeedbackItems' => [
+        'GetWebsiteButtons' => [
             'httpMethod' => 'GET',
-            'uri' => '/live/website/button/{id}/feedback',
-            'responseModel' => 'FeedbackItems',
+            'uri' => '/live/websites/button',
+            'responseModel' => 'WebsiteButtonItems',
+        ],
+        'GetEmailButtons' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/email/button',
+            'responseModel' => 'EmailButtonItems',
+        ],
+        'GetApps' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/apps',
+            'responseModel' => 'AppItems',
+        ],
+        'GetWebsiteFeedbackItems' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/websites/button/{id}/feedback',
+            'responseModel' => 'WebsiteFeedbackItems',
+            'parameters' => [
+                'id' => [
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'default' => '*'
+                ],
+                'since' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+                'limit' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+            ],
+        ],
+        'GetEmailFeedbackItems' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/email/button/{id}/feedback',
+            'responseModel' => 'EmailFeedbackItems',
+            'parameters' => [
+                'id' => [
+                    'type' => 'string',
+                    'location' => 'uri',
+                    'default' => '*'
+                ],
+                'since' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+                'limit' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+            ],
+        ],
+        'GetAppFeedbackItems' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/apps/{id}/feedback',
+            'responseModel' => 'AppFeedbackItems',
             'parameters' => [
                 'id' => [
                     'type' => 'string',
@@ -97,7 +160,7 @@ return [
         ],
     ],
     'models' => [
-        'FeedbackItem' => [
+        'WebsiteFeedbackItem' => [
             'type' => 'object',
             'properties' => [
                 'id' => [
@@ -166,13 +229,187 @@ return [
                 ],
             ],
         ],
-        'FeedbackItems' => [
+        'WebsiteFeedbackItems' => [
             'type' => 'array',
             'items' => [
-                '$ref' => 'FeedbackItem'
+                '$ref' => 'WebsiteFeedbackItem'
             ],
         ],
-        'ButtonItem' => [
+        'EmailFeedbackItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'userAgent' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'comment' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'location' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'date' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'custom' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'email' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'labels' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'nps' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'publicUrl' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'rating' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'buttonId' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'tags' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'url' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+            ],
+        ],
+        'EmailFeedbackItems' => [
+            'type' => 'array',
+            'items' => [
+                '$ref' => 'EmailFeedbackItem'
+            ],
+        ],
+        'AppFeedbackItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'date' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'timestamp' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'deviceName' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'data' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'custom' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'appId' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'appName' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'appVersion' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'osName' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'osVersion' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'location' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'geoLocation' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'freeMemory' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'totalMemory' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'freeStorage' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'totalStorage' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'screenshot' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'screensize' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'connection' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'ipAddress' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'language' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'orientation' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'batteryLevel' => [
+                    'location' => 'json',
+                    'type' => 'numeric'
+                ],
+            ],
+        ],
+        'AppFeedbackItems' => [
+            'type' => 'array',
+            'items' => [
+                '$ref' => 'AppFeedbackItem'
+            ],
+        ],
+        'WebsiteButtonItem' => [
             'type' => 'object',
             'properties' => [
                 'id' => [
@@ -185,10 +422,10 @@ return [
                 ]
             ],
         ],
-        'ButtonItems' => [
+        'WebsiteButtonItems' => [
             'type' => 'array',
             'items' => [
-                '$ref' => 'ButtonItem'
+                '$ref' => 'WebsiteButtonItem'
             ],
             "errorResponses" => [
                 [
@@ -198,7 +435,83 @@ return [
                 ]
             ],
         ],
-        'CampaignItem' => [
+        'EmailButtonItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'name' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'date' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'introText' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'locale' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'groups' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+            ],
+        ],
+        'EmailButtonItems' => [
+            'type' => 'array',
+            'items' => [
+                '$ref' => 'EmailButtonItem'
+            ],
+            "errorResponses" => [
+                [
+                    "code" => "403",
+                    "phrase" => "authorisation failed",
+                    "class" => "ClientErrorResponseException"
+                ]
+            ],
+        ],
+        'AppItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'name' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'date' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'status' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+            ],
+        ],
+        'AppItems' => [
+            'type' => 'array',
+            'items' => [
+                '$ref' => 'AppItem'
+            ],
+            "errorResponses" => [
+                [
+                    "code" => "403",
+                    "phrase" => "authorisation failed",
+                    "class" => "ClientErrorResponseException"
+                ]
+            ],
+        ],
+        'WebsiteCampaignItem' => [
             'type' => 'object',
             'properties' => [
                 'id' => [
@@ -227,10 +540,10 @@ return [
                 ],
             ],
         ],
-        'CampaignItems' => [
+        'WebsiteCampaignItems' => [
             'type' => 'array',
             'items' => [
-                '$ref' => 'CampaignItem'
+                '$ref' => 'WebsiteCampaignItem'
             ],
             "errorResponses" => [
                 [
@@ -240,7 +553,7 @@ return [
                 ]
             ],
         ],
-        'CampaignResultItem' => [
+        'WebsiteCampaignResultItem' => [
             'type' => 'object',
             'properties' => [
                 'id' => [
@@ -277,10 +590,44 @@ return [
                 ],
             ],
         ],
-        'CampaignResultItems' => [
+        'WebsiteCampaignStatsItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'completed' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'views' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+                'conversion' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
+            ],
+        ],
+        'WebsiteCampaignStatsItems' => [
             'type' => 'array',
             'items' => [
-                '$ref' => 'CampaignResultItem'
+                '$ref' => 'WebsiteCampaignStatsItem'
+            ],
+            "errorResponses" => [
+                [
+                    "code" => "403",
+                    "phrase" => "authorisation failed",
+                    "class" => "ClientErrorResponseException"
+                ]
+            ],
+        ],
+        'WebsiteCampaignResultItems' => [
+            'type' => 'array',
+            'items' => [
+                '$ref' => 'WebsiteCampaignResultItem'
             ],
             "errorResponses" => [
                 [

@@ -37,7 +37,7 @@ $client = Client::factory(array(
 // specifiy the paramteres as mentioned in the service description
 $params = ['id' => 'a3196e1047e6'];
 
-$iterator = $client->getIterator('GetCampaigns', $params);
+$iterator = $client->getIterator('GetWebsiteCampaigns', $params);
 
 foreach ($iterator as $feedbackItem) {
    print_r($feedbackItem);

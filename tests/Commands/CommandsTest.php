@@ -50,6 +50,10 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     protected $operation;
 
+    /**
+     * @var array
+     */
+    protected $service_description;
 
     protected function setUp()
     {
@@ -60,6 +64,23 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $this->client = Client::factory(array(
             "credentials" => $this->credentials,
         ));
+
+
+        $this->service_description = include __DIR__ . '/../../src/Resources/ServiceDescriptor.php';
+    }
+
+    public function testAllCommands() {
+        $operations = $this->service_description['operations'];
+        $filter = ['id' => '123ABC456'];
+
+        foreach($operations as $operationName => $operationDetails){
+            $command = $this->client->getCommand($operationName, $filter);
+            $request = $command->prepare();
+
+            $requestUrl = str_replace('{id}', $filter['id'], $operationDetails['uri']);
+            $this->assertEquals($request->getUrl(), baseURL . $requestUrl);
+
+        }
     }
 
     public function assertQueryParametersAreEqual($request, $filter)
@@ -69,34 +90,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testButtons()
-    {
-        $command = $this->client->getCommand('GetButtons');
-        $request = $command->prepare();
-
-        $this->assertEquals($request->getUrl(), baseURL . '/live/website/button');
-        $this->assertEmpty($request->getQuery());
-
-        $filter = ['limit' => 1, 'since' => 1416845584];
-        $command = $this->client->getCommand('GetButtons', $filter);
-        $request = $command->prepare();
-        $this->assertNotEmpty($request->getQuery());
-    }
-
 
     public function testGetFeedbackItems()
     {
-        $command = $this->client->getCommand('GetFeedbackItems');
-        $request = $command->prepare();
-        $this->assertEquals($request->getUrl(), baseURL . '/live/website/button/%2A/feedback');
+
 
         $filter = ['id' => '123ABC456'];
-        $command = $this->client->getCommand('GetFeedbackItems', $filter);
+        $command = $this->client->getCommand('GetWebsiteFeedbackItems', $filter);
         $request = $command->prepare();
-        $this->assertEquals($request->getUrl(), baseURL . '/live/website/button/' . $filter['id'] . '/feedback');
+        $this->assertEquals($request->getUrl(), baseURL . '/live/websites/button/' . $filter['id'] . '/feedback');
 
         $filter = ['id' => '123ABC456', 'limit' => 1, 'since' => 1416845584];
-        $command = $this->client->getCommand('GetFeedbackItems', $filter);
+        $command = $this->client->getCommand('GetWebsiteFeedbackItems', $filter);
         $request = $command->prepare();
         $this->assertNotEmpty($request->getQuery());
         $this->assertQueryParametersAreEqual($request, $filter);
@@ -105,13 +110,8 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetCampaigns()
     {
-        $command = $this->client->getCommand('GetCampaigns');
-        $request = $command->prepare();
-        $this->assertEquals($request->getUrl(), baseURL . '/live/website/campaign');
-        $this->assertEmpty($request->getQuery());
-
         $filter = ['id' => '123ABC456', 'limit' => 1, 'since' => 1416845584];
-        $command = $this->client->getCommand('GetCampaigns', $filter);
+        $command = $this->client->getCommand('GetWebsiteCampaigns', $filter);
         $request = $command->prepare();
         $this->assertNotEmpty($request->getQuery());
         $this->assertQueryParametersAreEqual($request, $filter);
@@ -119,17 +119,17 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetCampaignResults()
     {
-        $command = $this->client->getCommand('GetCampaignResults');
+        $command = $this->client->getCommand('GetWebsiteCampaignResults');
         $request = $command->prepare();
-        $this->assertNotEquals($request->getUrl(), baseURL . '/live/website/campaign/%2A/feedback');
+        $this->assertNotEquals($request->getUrl(), baseURL . '/live/websites/campaign/%2A/feedback');
 
         $filter = ['id' => '123ABC456'];
-        $command = $this->client->getCommand('GetCampaignResults', $filter);
+        $command = $this->client->getCommand('GetWebsiteCampaignResults', $filter);
         $request = $command->prepare();
-        $this->assertEquals($request->getUrl(), baseURL . '/live/website/campaign/' . $filter['id'] . '/results');
+        $this->assertEquals($request->getUrl(), baseURL . '/live/websites/campaign/' . $filter['id'] . '/results');
 
         $filter = ['id' => '123ABC456', 'limit' => 1, 'since' => 1416845584];
-        $command = $this->client->getCommand('GetCampaignResults', $filter);
+        $command = $this->client->getCommand('GetWebsiteCampaignResults', $filter);
         $request = $command->prepare();
         $this->assertNotEmpty($request->getQuery());
         $this->assertQueryParametersAreEqual($request, $filter);

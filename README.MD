@@ -46,7 +46,7 @@ $params = ['id' => '1A2B3C4D5E6F', 'limit' => 5];
 
 
 /* @var $command Guzzle\Service\Command\AbstractCommand */
-$command = $client->getCommand('GetFeedbackItems', $params);
+$command = $client->getCommand('GetWebsiteFeedbackItems', $params);
 /* @var $response Guzzle\Http\Message\Response */
 $response = $client->execute($command);
 
