@@ -28,8 +28,42 @@ namespace Usabilla\API\Resources;
 
 return [
     'baseUrl' => 'https://data.usabilla.com',
-    'apiVersion' => '1.1',
+    'apiVersion' => '1.2',
     'operations' => [
+        'GetInpageWidgets' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/websites/inpage',
+            'responseModel' => 'InpageWidgetItems',
+            'parameters' => [
+                'since' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+                'limit' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+            ],
+        ],
+        'GetInpageWidgetFeedbackItems' => [
+            'httpMethod' => 'GET',
+            'uri' => '/live/websites/inpage/{id}/feedback',
+            'responseModel' => 'InpageWidgetFeedbackItems',
+            'parameters' => [
+                'id' => [
+                    'type' => 'string',
+                    'location' => 'uri'
+                ],
+                'since' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+                'limit' => [
+                    'type' => 'integer',
+                    'location' => 'query'
+                ],
+            ],
+        ],
         'GetWebsiteCampaigns' => [
             'httpMethod' => 'GET',
             'uri' => '/live/websites/campaign',
@@ -509,6 +543,89 @@ return [
                     "phrase" => "authorisation failed",
                     "class" => "ClientErrorResponseException"
                 ]
+            ],
+        ],
+        'InpageWidgetItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'date' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'name' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+            ],
+        ],
+        'InpageWidgetItems' => [
+            'type' => 'array',
+            'items' => [
+                '$ref' => 'InpageWidgetItem'
+            ],
+            "errorResponses" => [
+                [
+                    "code" => "403",
+                    "phrase" => "authorisation failed",
+                    "class" => "ClientErrorResponseException"
+                ]
+            ],
+        ],
+        'InpageWidgetFeedbackItem' => [
+            'type' => 'object',
+            'properties' => [
+                'id' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'widgetId' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'date' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'userAgent' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'customData' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'data' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'geo' => [
+                    'location' => 'json',
+                    'type' => 'array'
+                ],
+                'url' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'rating' => [
+                    'location' => 'json',
+                    'type' => 'numeric'
+                ],
+                'comment' => [
+                    'location' => 'json',
+                    'type' => 'string'
+                ],
+                'mood' => [
+                    'location' => 'json',
+                    'type' => 'numeric'
+                ],
+                'nps' => [
+                    'location' => 'json',
+                    'type' => 'integer'
+                ],
             ],
         ],
         'WebsiteCampaignItem' => [
