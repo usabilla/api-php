@@ -46,7 +46,7 @@ $response = $client->execute($command);
 print_r($response->json());
 ```
 
-### More Examples
+### More examples:
 
-* [Feedback item iterator](https://github.com/usabilla/api-php/tree/master/examples/FeedbackIterator.php)
-* [Retrieve all buttons belonging to the account](https://github.com/usabilla/api-php/tree/master/examples/Buttons.php)
+* [Results iterator example](examples/iterator.php)
+* [Single results page example](examples/single_page.php)
