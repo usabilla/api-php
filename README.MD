@@ -28,27 +28,21 @@ This package allows PHP developers to gain access to the Usabilla resources such
 
 require 'vendor/autoload.php';
 
-use Usabilla\API\Client\Client;
-use Usabilla\API\Credentials\Credentials;
-use Guzzle\Plugin\ErrorResponse\ErrorResponsePlugin;
+use Usabilla\API\Client\UsabillaClient;
 
-$credentials = new Credentials();
-
-/** @var $client Client */
-$client = Client::factory([
-    'credentials' => $credentials,
-]);
+// Creates a new Usabilla client.
+$client = new UsabillaClient('ACCESS_KEY', 'SECRET_KEY');
 
 // Specify the parameters as mentioned in the service description.
 $params = ['id' => '1A2B3C4D5E6F', 'limit' => 5];
 
-/* @var $command Guzzle\Service\Command\AbstractCommand */
+// Gets the command.
 $command = $client->getCommand('GetWebsiteFeedbackItems', $params);
 
-/* @var $response Guzzle\Http\Message\Response */
+// Executes the command.
 $response = $client->execute($command);
 
-// Convert response to JSON
+// Prints the received response.
 print_r($response->json());
 ```
 
