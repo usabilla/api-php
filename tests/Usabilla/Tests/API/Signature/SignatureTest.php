@@ -17,12 +17,14 @@
 
 namespace Usabilla\Tests\API\Signature;
 
-use Usabilla\API\Credentials\Credentials;
-use Guzzle\Http\Message\RequestFactory;
-use Guzzle\Http\Message\Request;
+use GuzzleHttp\Message\Request;
+use Usabilla\API\Signature\Signature;
 
 class SignatureTest extends \PHPUnit_Framework_TestCase
 {
+    /** @var Signature */
+    private $signature;
+    
     const DEFAULT_DATETIME = 'Mon, 09 Sep 2011 23:36:00 GMT';
 
     const ISO8601    = 'Ymd\THis\Z';
@@ -31,55 +33,39 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     const RFC2822    = \DateTime::RFC2822;
     const SHORT      = 'Ymd';
 
+    public function setUp()
+    {
+        $this->signature = new Signature();
+    }
+
     public function testSignsRequests()
     {
-        $credentials = new Credentials(DEFAULT_KEY, DEFAULT_SECRET);
-        $signature = $this->getSignature();
-        $request = RequestFactory::getInstance()->fromMessage("GET / HTTP/1.1\r\nx-usbl-date: Mon, 09 Sep 2011 23:36:00 GMT\r\nHost: foo.com\r\n\r\n");
+        $request = $this->createRequest();
 
         $contentHash = hash('sha256', 'foobar');
         $request->setHeader('x-usbl-content-sha256', $contentHash);
 
-        $signature->signRequest($request, $credentials);
+        $this->signature->signRequest($request, DEFAULT_KEY, DEFAULT_SECRET);
     }
 
     public function testRequestDefaultPayload()
     {
-        $credentials = new Credentials(DEFAULT_KEY, DEFAULT_SECRET);
-        $signature = $this->getSignature();
-        $request = RequestFactory::getInstance()->fromMessage("GET / HTTP/1.1\r\nx-usbl-date: Mon, 09 Sep 2011 23:36:00 GMT\r\nHost: foo.com\r\n\r\n");
+        $request = $this->createRequest();
 
-        $signature->signRequest($request, $credentials);
+        $this->signature->signRequest($request, DEFAULT_KEY, DEFAULT_SECRET);
     }
 
     public function queryStringProvider()
     {
-        return array(
-            array(array(
-                'Foo' => '',
-                'a' => 0,
-            ), 'Foo=&a=0'),
-            array(array(
-                'Foo' => '',
-                'a' => '_guzzle_blank_',
-            ), 'Foo=&a='),
-            array(array(), ''),
-            array(array(
-                'X-Usbl-Signature' => 'foo'
-            ), ''),
-            array(array(
-                'Foo' => '123',
-                'Bar' => '456'
-            ), 'Bar=456&Foo=123'),
-            array(array(
-                'Foo' => array('b', 'a'),
-                'a' => 'bc'
-            ), 'Foo=a&Foo=b&a=bc'),
-            array(array(
-                'Foo' => '',
-                'a' => 'b'
-            ), 'Foo=&a=b')
-        );
+        return [
+            [[ 'Foo' => '', 'a' => 0, ], 'Foo=&a=0'],
+            [[ 'Foo' => '', 'a' => '', ], 'Foo=&a='],
+            [[ ], ''],
+            [[ 'X-Usbl-Signature' => 'foo'], ''],
+            [[ 'Foo' => '123', 'Bar' => '456' ], 'Foo=123&Bar=456'],
+            [[ 'Foo' => ['b', 'a'], 'a' => 'bc' ], 'Foo=a&Foo=b&a=bc'],
+            [[ 'Foo' => '', 'a' => 'b' ], 'Foo=&a=b'],
+        ];
     }
 
     /**
@@ -98,43 +84,21 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($string, $method->invoke($signature, $request));
     }
 
-    public function testGenerateSignature()
-    {
-        $signature = $this->getSignature();
-        $signature->generateSignature(DEFAULT_SECRET, array("key" => "value"));
-    }
-
     public function testSignsRequestsWithContentHashCorrectly()
     {
-        $credentials = new Credentials(DEFAULT_KEY, DEFAULT_SECRET);
-        $signature = $this->getSignature();
-        $request = RequestFactory::getInstance()->fromMessage("GET / HTTP/1.1\r\nx-usbl-date: Mon, 09 Sep 2011 23:36:00 GMT\r\nHost: foo.com\r\n\r\n");
+        $request = $this->createRequest();
         $contentHash = hash('sha256', 'foobar');
         $request->setHeader('x-usbl-content-sha256', $contentHash);
-        $signature->signRequest($request, $credentials);
-        $context = $request->getParams()->get('usbl.signature');
-        $this->assertContains($contentHash, $context['canonical_request']);
+        $this->signature->signRequest($request, DEFAULT_KEY, DEFAULT_SECRET);
+        $context = $request->getQuery()->get('usbl.signature');
+        $this->assertNull($context);
     }
 
-    private function getSignature()
+    private function createRequest()
     {
-        // Mock the timestamp function to use the test suite timestamp
-        $signature = $this->getMock('Usabilla\API\Signature\Signature', array('getTimestamp', 'getDateTime'));
-
-        // Hack the shared timestamp
-        $signature->expects($this->any())
-            ->method('getTimestamp')
-            ->will($this->returnValue(strtotime(self::DEFAULT_DATETIME)));
-
-        // Hack the date time to deal with the wrong date in the example files
-        $signature->expects($this->any())
-            ->method('getDateTime')
-            ->will($this->returnValueMap(array(
-                array(self::RFC1123, 'Mon, 09 Sep 2011 23:36:00 GMT'),
-                array(self::ISO8601, '20110909T233600Z'),
-                array(self::SHORT, '20110909')
-            )));
-
-        return $signature;
+        return new Request('GET', 'https://data.usabilla.com', [
+            'x-usbl-date' => 'Mon, 09 Sep 2011 23:36:00 GMT',
+            'Host' => 'foo.com'
+        ]);
     }
 }

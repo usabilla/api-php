@@ -20,11 +20,35 @@ namespace Usabilla\Tests\API\Client;
 use Usabilla\API\Client\UsabillaClient;
 use PHPUnit_Framework_TestCase;
 
-class CommandsTest extends PHPUnit_Framework_TestCase
+class UsabillaClientTest extends PHPUnit_Framework_TestCase
 {
-    public function testDefaultClient()
+    /** @var \PHPUnit_Framework_MockObject_MockObject|UsabillaClient */
+    private $client;
+
+    public function setUp()
     {
-        $client = new UsabillaClient(DEFAULT_KEY, DEFAULT_SECRET);
+        $this->client = $this
+            ->getMockBuilder(UsabillaClient::class)
+            ->setConstructorArgs([ DEFAULT_KEY, DEFAULT_SECRET, ['validate' => false, 'process' => false] ])
+            ->getMock();
+    }
+
+    public function testGetIterator()
+    {
+        $this
+            ->client
+            ->expects($this->any())
+            ->method('execute')
+            ->will(
+                $this->returnValue([
+                    'hasMore' => false,
+                    'items' => [1, 2, 3],
+                    'lastTimestamp' => 0
+                ])
+            );
+
+        $apps = $this->client->getIterator('GetApps');
+        $this->assertNull($apps);
     }
 }
 

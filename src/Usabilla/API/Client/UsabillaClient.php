@@ -35,15 +35,16 @@ class UsabillaClient extends GuzzleClient
      *
      * @param string $accessKey
      * @param string $secretKey
+     * @param array  $config
      */
-    public function __construct($accessKey, $secretKey)
+    public function __construct($accessKey, $secretKey, array $config = [])
     {
         $client = new Client();
         $client->getEmitter()->attach(new SignatureSubscriber(new Signature(), $accessKey, $secretKey));
 
         $description = new UsabillaDescription();
 
-        parent::__construct($client, $description);
+        parent::__construct($client, $description, $config);
     }
 
     /**
