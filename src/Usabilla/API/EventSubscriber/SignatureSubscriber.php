@@ -19,7 +19,6 @@ namespace Usabilla\API\EventSubscriber;
 
 use GuzzleHttp\Event\BeforeEvent;
 use GuzzleHttp\Event\SubscriberInterface;
-use Usabilla\API\Credentials\Credentials;
 use Usabilla\API\Signature\Signature;
 
 /**
@@ -27,26 +26,27 @@ use Usabilla\API\Signature\Signature;
  */
 class SignatureSubscriber implements SubscriberInterface
 {
-    /**
-     * @var Credentials
-     */
-    protected $credentials;
-
-    /**
-     * @var Signature
-     */
+    /** @var Signature */
     protected $signature;
+
+    /** @var string */
+    protected $accessKey;
+
+    /** @var string */
+    protected $secretKey;
 
     /**
      * Construct a new request signing plugin
      *
-     * @param Credentials $credentials Credentials used to sign requests
-     * @param Signature   $signature   Signature implementation
+     * @param Signature $signature Signature implementation
+     * @param string    $accessKey
+     * @param string    $secretKey
      */
-    public function __construct(Credentials $credentials, Signature $signature)
+    public function __construct(Signature $signature, $accessKey, $secretKey)
     {
-        $this->credentials = $credentials;
-        $this->signature   = $signature;
+        $this->signature = $signature;
+        $this->accessKey = $accessKey;
+        $this->secretKey = $secretKey;
     }
 
     /**
@@ -66,6 +66,6 @@ class SignatureSubscriber implements SubscriberInterface
      */
     public function onBefore(BeforeEvent $event)
     {
-        $this->signature->signRequest($event->getRequest(), $this->credentials);
+        $this->signature->signRequest($event->getRequest(), $this->accessKey, $this->secretKey);
     }
 }

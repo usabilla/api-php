@@ -19,7 +19,6 @@ namespace Usabilla\API\Client;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
-use Usabilla\API\Credentials\Credentials;
 use Usabilla\API\Description\UsabillaDescription;
 use Usabilla\API\EventSubscriber\SignatureSubscriber;
 use Usabilla\API\Signature\Signature;
@@ -40,7 +39,7 @@ class UsabillaClient extends GuzzleClient
     public function __construct($accessKey, $secretKey)
     {
         $client = new Client();
-        $client->getEmitter()->attach(new SignatureSubscriber(new Credentials($accessKey, $secretKey), new Signature()));
+        $client->getEmitter()->attach(new SignatureSubscriber(new Signature(), $accessKey, $secretKey));
 
         $description = new UsabillaDescription();
 

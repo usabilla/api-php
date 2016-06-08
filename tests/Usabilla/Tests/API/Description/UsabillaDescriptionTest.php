@@ -15,26 +15,23 @@
  * permissions and limitations under the License.
  */
 
-namespace Usabilla\Tests\API\Client;
+namespace Usabilla\Tests\API\Description;
 
-use Usabilla\API\Client\UsabillaClient;
-use PHPUnit_Framework_TestCase;
+use Usabilla\API\Description\UsabillaDescription;
 
-class CommandsTest extends PHPUnit_Framework_TestCase
+class UsabillaDescriptionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDefaultClient()
+    /** @var UsabillaDescription */
+    private $description;
+
+    public function setUp()
     {
-        $client = new UsabillaClient(DEFAULT_KEY, DEFAULT_SECRET);
+        $this->description = new UsabillaDescription();
+    }
+
+    public function testGetOperations()
+    {
+        $operations = $this->description->getOperations();
+        $this->assertEquals(11, count($operations));
     }
 }
-
-
-
-
-
-
-
-
-
-
-

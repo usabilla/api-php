@@ -18,7 +18,6 @@
 namespace Usabilla\API\Signature;
 
 use GuzzleHttp\Message\RequestInterface;
-use Usabilla\API\Credentials\Credentials;
 
 class Signature
 {
@@ -30,11 +29,12 @@ class Signature
 
     /**
      * @param RequestInterface $request
-     * @param Credentials $credentials
+     * @param string $accessKey
+     * @param string $secretKey
      *
      * @return RequestInterface
      */
-    public function signRequest(RequestInterface $request, Credentials $credentials)
+    public function signRequest(RequestInterface $request, $accessKey, $secretKey)
     {
         $timestamp = (new \DateTime('now'))->getTimestamp();
         $longDate = gmdate(self::ISO8601, $timestamp);
@@ -46,12 +46,12 @@ class Signature
         $signingContext['string_to_sign'] = $this->createStringToSign($longDate, $credentialScope, $signingContext['canonical_request']);
 
         // Calculate the signing key using a series of derived keys
-        $signature = hash_hmac('sha256', $signingContext['string_to_sign'], $this->getSigningKey($shortDate, $credentials->getSecretKey()));
+        $signature = hash_hmac('sha256', $signingContext['string_to_sign'], $this->getSigningKey($shortDate, $secretKey));
 
         $request->addHeader(
             'Authorization', sprintf(
                 'USBL1-HMAC-SHA256 Credential=%s/%s, SignedHeaders=%s, Signature=%s',
-                $credentials->getAccessKey(),
+                $accessKey,
                 $credentialScope,
                 $signingContext['signed_headers'],
                 $signature

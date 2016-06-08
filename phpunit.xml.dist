@@ -13,7 +13,7 @@
     </testsuites>
 
     <php>
-        <const name="baseURL" value="https://data.usabilla.com"/>
+        <const name="BASE_URL" value="https://data.usabilla.com"/>
         <const name="DEFAULT_KEY" value="USBLEXAMPLE"/>
         <const name="DEFAULT_SECRET" value="wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY"/>
     </php>

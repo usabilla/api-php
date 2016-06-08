@@ -18,6 +18,7 @@
 namespace Usabilla\API\Description;
 
 use GuzzleHttp\Command\Guzzle\Description;
+use GuzzleHttp\Command\Guzzle\Operation;
 
 class UsabillaDescription extends Description
 {
@@ -519,5 +520,13 @@ class UsabillaDescription extends Description
             ]
 
         ]);
+    }
+
+    /**
+     * @return Operation[]
+     */
+    public function getOperations()
+    {
+        return parent::getOperations();
     }
 }

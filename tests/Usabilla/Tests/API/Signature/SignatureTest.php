@@ -18,13 +18,11 @@
 namespace Usabilla\Tests\API\Signature;
 
 use Usabilla\API\Credentials\Credentials;
-use Usabilla\API\Signature\Signature;
 use Guzzle\Http\Message\RequestFactory;
 use Guzzle\Http\Message\Request;
 
 class SignatureTest extends \PHPUnit_Framework_TestCase
 {
-
     const DEFAULT_DATETIME = 'Mon, 09 Sep 2011 23:36:00 GMT';
 
     const ISO8601    = 'Ymd\THis\Z';
@@ -33,36 +31,6 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     const RFC2822    = \DateTime::RFC2822;
     const SHORT      = 'Ymd';
 
-    /**
-     * @return Signature
-     */
-    private function getSignature()
-    {
-        // Mock the timestamp function to use the test suite timestamp
-        $signature = $this->getMock('Usabilla\API\Signature\Signature', array('getTimestamp', 'getDateTime'));
-
-        // Hack the shared timestamp
-        $signature->expects($this->any())
-            ->method('getTimestamp')
-            ->will($this->returnValue(strtotime(self::DEFAULT_DATETIME)));
-
-        // Hack the date time to deal with the wrong date in the example files
-        $signature->expects($this->any())
-            ->method('getDateTime')
-            ->will($this->returnValueMap(array(
-                array(self::RFC1123, 'Mon, 09 Sep 2011 23:36:00 GMT'),
-                array(self::ISO8601, '20110909T233600Z'),
-                array(self::SHORT, '20110909')
-            )));
-
-        return $signature;
-    }
-
-
-
-    /**
-     * @covers Usabilla\API\Signature\Signature::signRequest
-     */
     public function testSignsRequests()
     {
         $credentials = new Credentials(DEFAULT_KEY, DEFAULT_SECRET);
@@ -75,9 +43,6 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $signature->signRequest($request, $credentials);
     }
 
-    /**
-     * @covers Usabilla\API\Signature\Signature::getPayload
-     */
     public function testRequestDefaultPayload()
     {
         $credentials = new Credentials(DEFAULT_KEY, DEFAULT_SECRET);
@@ -118,7 +83,6 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Usabilla\API\Signature\Signature::getCanonicalizedQueryString
      * @dataProvider queryStringProvider
      */
     public function testCreatesCanonicalizedQueryString($headers, $string)
@@ -134,22 +98,12 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($string, $method->invoke($signature, $request));
     }
 
-
-    /**
-     * @covers Usabilla\API\Signature\Signature::generateSignature
-     */
     public function testGenerateSignature()
     {
         $signature = $this->getSignature();
         $signature->generateSignature(DEFAULT_SECRET, array("key" => "value"));
     }
 
-
-    /**
-     * @covers Usabilla\API\Signature\Signature::signRequest
-     * @covers Usabilla\API\Signature\Signature::createSigningContext
-     * @covers Usabilla\API\Signature\Signature::getSigningKey
-     */
     public function testSignsRequestsWithContentHashCorrectly()
     {
         $credentials = new Credentials(DEFAULT_KEY, DEFAULT_SECRET);
@@ -162,4 +116,25 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($contentHash, $context['canonical_request']);
     }
 
+    private function getSignature()
+    {
+        // Mock the timestamp function to use the test suite timestamp
+        $signature = $this->getMock('Usabilla\API\Signature\Signature', array('getTimestamp', 'getDateTime'));
+
+        // Hack the shared timestamp
+        $signature->expects($this->any())
+            ->method('getTimestamp')
+            ->will($this->returnValue(strtotime(self::DEFAULT_DATETIME)));
+
+        // Hack the date time to deal with the wrong date in the example files
+        $signature->expects($this->any())
+            ->method('getDateTime')
+            ->will($this->returnValueMap(array(
+                array(self::RFC1123, 'Mon, 09 Sep 2011 23:36:00 GMT'),
+                array(self::ISO8601, '20110909T233600Z'),
+                array(self::SHORT, '20110909')
+            )));
+
+        return $signature;
+    }
 }
