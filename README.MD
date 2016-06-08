@@ -32,7 +32,7 @@ use Usabilla\API\Client\Client;
 use Usabilla\API\Credentials\Credentials;
 use Guzzle\Plugin\ErrorResponse\ErrorResponsePlugin;
 
-$credentials = new Credentials("CLIENT-API-KEY", "CLIENT-SECRET-KEY");
+$credentials = new Credentials();
 
 /** @var $client Client */
 $client = Client::factory([
