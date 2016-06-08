@@ -10,14 +10,14 @@ This package allows PHP developers to gain access to the Usabilla resources such
 
 ## Features
 
-* Built for PHP 5.4.3+ and compliant with [PSR-4](http://www.php-fig.org/psr/psr-4/).
-* Built on [Guzzle](https://github.com/guzzle/guzzle3).
+* Built for PHP 5.6+ and compliant with [PSR-4](http://www.php-fig.org/psr/psr-4/).
+* Built on [Guzzle Services](https://github.com/guzzle/guzzle-services).
 * Installable through Composer.
 
 ## Getting Started
 
 1. [Request Usabilla API credentials](https://app.usabilla.com/member/account/settings#public_api).
-2. Run `composer require usabilla/usabilla-api-php`.
+2. Run `composer require usabilla/usabilla-api-php` on your project.
 
 ## Quick Example
 
