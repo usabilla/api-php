@@ -6,7 +6,7 @@ This package allows PHP developers to gain access to the Usabilla resources such
 
 ## Resources
 
-* [API Documentation](https://usabilla.com/api) – For in-depth getting started and usage information.
+* [API Documentation](http://developers.usabilla.com) – For in-depth getting started and usage information.
 
 ## Features
 
