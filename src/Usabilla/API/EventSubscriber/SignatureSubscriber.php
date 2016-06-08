@@ -15,27 +15,28 @@
  * permissions and limitations under the License.
  */
 
-namespace Usabilla\API\Signature;
+namespace Usabilla\API\EventSubscriber;
 
-
+use GuzzleHttp\Event\BeforeEvent;
+use GuzzleHttp\Event\SubscriberInterface;
 use Usabilla\API\Credentials\Credentials;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-
+use Usabilla\API\Signature\Signature;
 
 /**
  * Listener used to sign requests before they are sent over the wire
  */
-class SignatureListener implements EventSubscriberInterface
+class SignatureSubscriber implements SubscriberInterface
 {
     /**
      * @var Credentials
      */
     protected $credentials;
+
     /**
      * @var Signature
      */
     protected $signature;
+
     /**
      * Construct a new request signing plugin
      *
@@ -45,34 +46,26 @@ class SignatureListener implements EventSubscriberInterface
     public function __construct(Credentials $credentials, Signature $signature)
     {
         $this->credentials = $credentials;
-        $this->signature = $signature;
+        $this->signature   = $signature;
     }
+
     /**
      * {@inheritdoc}
      */
-    public static function getSubscribedEvents()
+    public function getEvents()
     {
-        return array(
-            'request.before_send'        => array('onRequestBeforeSend', -255),
-            'client.credentials_changed' => array('onCredentialsChanged')
-        );
+        return [
+            'before' => ['onBefore', -255],
+        ];
     }
-    /**
-     * Updates the listener with new credentials if the client is updated
-     *
-     * @param Event $event Event emitted
-     */
-    public function onCredentialsChanged(Event $event)
-    {
-        $this->credentials = $event['credentials'];
-    }
+
     /**
      * Signs requests before they are sent
      *
-     * @param Event $event Event emitted
+     * @param BeforeEvent $event Event emitted
      */
-    public function onRequestBeforeSend(Event $event)
+    public function onBefore(BeforeEvent $event)
     {
-        $this->signature->signRequest($event['request'], $this->credentials);
+        $this->signature->signRequest($event->getRequest(), $this->credentials);
     }
 }

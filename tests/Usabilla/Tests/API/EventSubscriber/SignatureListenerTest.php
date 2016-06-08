@@ -24,7 +24,7 @@ use Guzzle\Common\Collection;
 use Guzzle\Http\Message\Request;
 use Guzzle\Common\Event;
 
-class SignatureListenerTest extends \PHPUnit_Framework_TestCase
+class SignatureSubscriberTest extends \PHPUnit_Framework_TestCase
 {
 
 
