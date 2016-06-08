@@ -157,12 +157,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'name' => [ '$ref' => 'NameAttribute' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'status' => [ 'location' => 'json', 'type' => 'string' ]
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -179,50 +173,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'timestamp' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'deviceName' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'data' => [
-//                                        'location' => 'json',
-//                                        'type' => 'object',
-//                                        'properties' => [
-//                                            'rating' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                            'nps' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                            'comment' => [ 'location' => 'json', 'type' => 'string' ],
-//                                        ]
-//                                    ],
-//                                    'custom' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'appId' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'appName' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'appVersion' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'osName' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'osVersion' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'location' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'geoLocation' => [
-//                                        'location' => 'json',
-//                                        'type' => 'object',
-//                                        'attributes' => [
-//                                            'country' => [ 'location' => 'json', 'type' => 'string' ],
-//                                            'region' => [ 'location' => 'json', 'type' => 'string' ],
-//                                            'city' => [ 'location' => 'json', 'type' => 'string' ],
-//                                            'lat' => [ 'location' => 'json', 'type' => 'float' ],
-//                                            'lon' => [ 'location' => 'json', 'type' => 'float' ],
-//                                        ],
-//                                    ],
-//                                    'freeMemory' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'totalMemory' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'freeStorage' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'totalStorage' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'screenshot' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'screensize' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'connection' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'ipAddress' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'language' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'orientation' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'batteryLevel' => [ 'location' => 'json', 'type' => 'numeric' ],
-//                                ],
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -239,24 +189,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'userAgent' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'comment' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'location' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'custom' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'email' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'html_snippet' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'image' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'labels' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'nps' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'publicUrl' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'rating' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'buttonId' => [ '$ref' => 'ButtonIdAttribute' ],
-//                                    'tags' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'url' => [ 'location' => 'json', 'type' => 'string' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -273,22 +205,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'userAgent' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'comment' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'location' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'custom' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'email' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'labels' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'nps' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'publicUrl' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'rating' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'buttonId' => [ '$ref' => 'ButtonIdAttribute' ],
-//                                    'tags' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'url' => [ 'location' => 'json', 'type' => 'string' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -305,10 +221,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'name' => [ '$ref' => 'NameAttribute' ]
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -332,14 +244,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'name' => [ '$ref' => 'NameAttribute' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'introText' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'locale' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'groups' => [ 'location' => 'json', 'type' => 'array' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -363,11 +267,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'name' => [ '$ref' => 'NameAttribute' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -391,20 +290,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'widgetId' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'userAgent' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'customData' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'data' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'geo' => [ 'location' => 'json', 'type' => 'array' ],
-//                                    'url' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'rating' => [ 'location' => 'json', 'type' => 'numeric' ],
-//                                    'comment' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'mood' => [ 'location' => 'json', 'type' => 'numeric' ],
-//                                    'nps' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -421,14 +306,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'buttonId' => [ '$ref' => 'ButtonIdAttribute' ],
-//                                    'analyticsId' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'status' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    'name' => [ '$ref' => 'NameAttribute' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -452,12 +329,6 @@ class UsabillaDescription extends Description
                             'type' => 'array',
                             'items' => [
                                 'type' => 'object',
-//                                'properties' => [
-//                                    'id' => [ '$ref' => 'IdAttribute' ],
-//                                    'completed' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'views' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                    'conversion' => [ 'location' => 'json', 'type' => 'integer' ],
-//                                ]
                             ],
                         ],
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
@@ -480,16 +351,6 @@ class UsabillaDescription extends Description
                                 'type' => 'array',
                                 'attributes' => [
                                     'type' => 'object',
-//                                    'properties' => [
-//                                        'id' => [ '$ref' => 'IdAttribute' ],
-//                                        'campaignId' => [ 'location' => 'json', 'type' => 'string' ],
-//                                        'date' => [ 'location' => 'json', 'type' => 'string' ],
-//                                        'userAgent' => [ 'location' => 'json', 'type' => 'string' ],
-//                                        'custom' => [ 'location' => 'json', 'type' => 'array' ],
-//                                        'data' => [ 'location' => 'json', 'type' => 'array' ],
-//                                        'time' => [ 'location' => 'json', 'type' => 'string' ],
-//                                        'location' => [ 'location' => 'json', 'type' => 'string' ],
-//                                    ],
                                 ]
                             ]
                         ],
@@ -502,14 +363,6 @@ class UsabillaDescription extends Description
                         ]
                     ],
                 ],
-
-                // Attribute models.
-                'ButtonIdAttribute'      => [ 'location' => 'json', 'type' => 'string' ],
-                'CountAttribute'         => [ 'location' => 'json', 'type' => 'int' ],
-                'HasMoreAttribute'       => [ 'location' => 'json', 'type' => 'boolean' ],
-                'IdAttribute'            => [ 'location' => 'json', 'type' => 'string' ],
-                'NameAttribute'          => [ 'location' => 'json', 'type' => 'string' ],
-                'LastTimestampAttribute' => [ 'location' => 'json', 'type' => 'int' ],
 
                 // Parameter models.
                 'LimitParam' => [ 'type' => 'integer', 'location' => 'query' ],
