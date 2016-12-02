@@ -43,7 +43,7 @@ $command = $client->getCommand('GetWebsiteFeedbackItems', $params);
 $response = $client->execute($command);
 
 // Prints the received response.
-print_r($response->json());
+print_r($response);
 ```
 
 ### More examples:
