@@ -364,6 +364,11 @@ class UsabillaDescription extends Description
                     ],
                 ],
 
+                // Other models that are fetched from the Usabilla API.
+                'CountAttribute' => ['type' => 'integer', 'location' => 'json'],
+                'HasMoreAttribute' => ['type' => 'boolean', 'location' => 'json'],
+                'LastTimestampAttribute' => ['type' => 'integer', 'location' => 'json'],
+
                 // Parameter models.
                 'LimitParam' => [ 'type' => 'integer', 'location' => 'query' ],
                 'MandatoryIdParam' => [ 'type' => 'string', 'location' => 'uri' ],
