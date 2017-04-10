@@ -147,71 +147,20 @@ class UsabillaDescription extends Description
             'models' => [
 
                 // The main models that can be fetched from the Usabilla API.
-                'AppItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ]
-                ],
+                'AppItems' => [ '$ref' => 'DefaultRequest' ],
+                'AppFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
+                'WebsiteFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
+                'EmailFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
+                'WebsiteButtonItems' => [ '$ref' => 'DefaultRequest' ],
+                'EmailButtonItems' => [ '$ref' => 'DefaultRequest' ],
+                'InpageWidgetItems' => [ '$ref' => 'DefaultRequest' ],
+                'InpageWidgetFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
+                'WebsiteCampaignItems' => [ '$ref' => 'DefaultRequest' ],
+                'WebsiteCampaignStatsItems'  => [ '$ref' => 'DefaultRequest' ],
+                'WebsiteCampaignResultItems' => [ '$ref' => 'DefaultRequest' ],
 
-                'AppFeedbackItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                ],
-
-                'WebsiteFeedbackItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                ],
-
-                'EmailFeedbackItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                ],
-
-                'WebsiteButtonItems' => [
+                // Request types
+                'DefaultRequest' => [
                     'type' => 'object',
                     'properties' => [
                         'count' => [ '$ref' => 'CountAttribute' ],
@@ -226,139 +175,7 @@ class UsabillaDescription extends Description
                         'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
                     ],
                     'errorResponses' => [
-                        [
-                            'code' => '403',
-                            'phrase' => 'authorisation failed',
-                            'class' => 'ClientErrorResponseException'
-                        ]
-                    ],
-                ],
-
-                'EmailButtonItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                    'errorResponses' => [
-                        [
-                            'code' => '403',
-                            'phrase' => 'authorisation failed',
-                            'class' => 'ClientErrorResponseException'
-                        ]
-                    ],
-                ],
-
-                'InpageWidgetItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                    'errorResponses' => [
-                        [
-                            'code' => '403',
-                            'phrase' => 'authorisation failed',
-                            'class' => 'ClientErrorResponseException'
-                        ]
-                    ],
-                ],
-
-                'InpageWidgetFeedbackItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                ],
-
-                'WebsiteCampaignItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                    'errorResponses' => [
-                        [
-                            'code' => '403',
-                            'phrase' => 'authorisation failed',
-                            'class' => 'ClientErrorResponseException'
-                        ]
-                    ],
-                ],
-
-                'WebsiteCampaignStatsItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'count' => [ '$ref' => 'CountAttribute' ],
-                        'hasMore' => [ '$ref' => 'HasMoreAttribute' ],
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                        'lastTimestamp' => [ '$ref' => 'LastTimestampAttribute' ],
-                    ],
-                    'errorResponses' => [
-                        [
-                            'code' => '403',
-                            'phrase' => 'authorisation failed',
-                            'class' => 'ClientErrorResponseException'
-                        ]
-                    ],
-                ],
-
-                'WebsiteCampaignResultItems' => [
-                    'type' => 'object',
-                    'properties' => [
-                        'items' => [
-                            'location' => 'json',
-                            'type' => 'array',
-                            'items' => [
-                                'type' => 'object',
-                            ],
-                        ],
-                    ],
-                    'errorResponses' => [
-                        [
-                            'code' => '403',
-                            'phrase' => 'authorisation failed',
-                            'class' => 'ClientErrorResponseException'
-                        ]
+                        [ '$ref' => '403Error' ]
                     ],
                 ],
 
@@ -372,6 +189,13 @@ class UsabillaDescription extends Description
                 'MandatoryIdParam' => [ 'type' => 'string', 'location' => 'uri' ],
                 'NonMandatoryIdParam' => [ 'type' => 'string', 'location' => 'uri', 'default' => '*' ],
                 'SinceParam' => [ 'type' => 'integer', 'location' => 'query' ],
+
+                // Error responses
+                '403Error' => [
+                    'code'   => '403',
+                    'phrase' => 'authorisation failed',
+                    'class'  => 'ClientErrorResponseException'
+                ]
 
             ]
 
