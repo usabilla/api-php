@@ -346,13 +346,11 @@ class UsabillaDescription extends Description
                     'type' => 'object',
                     'properties' => [
                         'items' => [
+                            'location' => 'json',
+                            'type' => 'array',
                             'items' => [
-                                'location' => 'json',
-                                'type' => 'array',
-                                'attributes' => [
-                                    'type' => 'object',
-                                ]
-                            ]
+                                'type' => 'object',
+                            ],
                         ],
                     ],
                     'errorResponses' => [
