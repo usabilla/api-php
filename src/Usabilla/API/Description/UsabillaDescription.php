@@ -54,6 +54,23 @@ class UsabillaDescription extends Description
                     ],
                 ],
 
+                'GetAppCampaigns' => [
+                    'httpMethod' => 'GET',
+                    'uri' => '/live/apps/campaign',
+                    'responseModel' => 'AppCampaignItems',
+                ],
+
+                'GetAppCampaignResults' => [
+                    'httpMethod' => 'GET',
+                    'uri' => '/live/apps/campaign/{id}/results',
+                    'responseModel' => 'AppCampaignResults',
+                    'parameters' => [
+                        'id' => [ '$ref' => 'MandatoryIdParam' ],
+                        'limit' => [ '$ref' => 'LimitParam' ],
+                        'since' => [ '$ref' => 'SinceParam' ],
+                    ],
+                ],
+
                 // Usabilla for Email.
                 'GetEmailButtons' => [
                     'httpMethod' => 'GET',
@@ -149,6 +166,8 @@ class UsabillaDescription extends Description
                 // The main models that can be fetched from the Usabilla API.
                 'AppItems' => [ '$ref' => 'DefaultRequest' ],
                 'AppFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
+                'AppCampaignItems' => [ '$ref' => 'DefaultRequest' ],
+                'AppCampaignResults' => [ '$ref' => 'DefaultRequest' ],
                 'WebsiteFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
                 'EmailFeedbackItems' => [ '$ref' => 'DefaultRequest' ],
                 'WebsiteButtonItems' => [ '$ref' => 'DefaultRequest' ],
