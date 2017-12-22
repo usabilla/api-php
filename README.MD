@@ -46,6 +46,16 @@ $response = $client->execute($command);
 print_r($response);
 ```
 
+### Using Command Line
+
+You can use the command line to retrieve results from the API using scripts found in the [example folder](examples/):
+
+* Using single_page.php :
+`php single_page.php {command} {access-key} {secret-key}`
+
+* Using single_page_with_id.php :
+`php single_page_with_id.php {command} {id} {access-key} {secret-key}`
+
 ### More examples:
 
 * [Results iterator example](examples/iterator.php)

@@ -32,6 +32,6 @@ class UsabillaDescriptionTest extends \PHPUnit_Framework_TestCase
     public function testGetOperations()
     {
         $operations = $this->description->getOperations();
-        $this->assertEquals(11, count($operations));
+        $this->assertEquals(13, count($operations));
     }
 }
