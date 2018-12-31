@@ -15,9 +15,9 @@ This package allows PHP developers to gain access to the Usabilla resources such
 * Installable through Composer.
 
 ## Getting Started
-
-1. [Request Usabilla API credentials](https://app.usabilla.com/member/account/settings#public_api).
-2. Run `composer require usabilla/usabilla-api-php` on your project.
+1. Install Composer by following installation instructions on: https://getcomposer.org/download/
+2. [Request Usabilla API credentials](https://app.usabilla.com/member/account/settings#public_api).
+3. Run `composer require usabilla/usabilla-api-php` on your project.
 
 ## Quick Example
 
@@ -34,7 +34,7 @@ use Usabilla\API\Client\UsabillaClient;
 $client = new UsabillaClient('ACCESS_KEY', 'SECRET_KEY');
 
 // Specify the parameters as mentioned in the service description.
-$params = ['id' => '1A2B3C4D5E6F', 'limit' => 5];
+$params = ['id' => 'BUTTON_ID', 'limit' => 5];
 
 // Gets the command.
 $command = $client->getCommand('GetWebsiteFeedbackItems', $params);
